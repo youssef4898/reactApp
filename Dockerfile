@@ -5,5 +5,5 @@ COPY . .
 RUN npm ci 
 RUN npm run build
 EXPOSE 3000
-# Start the app
+ENV NODE_ENV production
 CMD [ "npx", "serve", "build" ]
