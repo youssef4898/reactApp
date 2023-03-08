@@ -1,8 +1,9 @@
 pipeline {  
     agent {
         docker {
+            withDockerRegistry([credentialsId: "docker-hub", url: ""]){
             image 'node:lts-buster-slim'
-            args '-p 3000:3000'
+                args '-p 3000:3000'}
         }
     }
    
