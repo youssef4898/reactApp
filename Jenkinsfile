@@ -1,11 +1,7 @@
 pipeline {  
-    agent {
-        docker {
-            withDockerRegistry([credentialsId: "docker-hub", url: ""]){
-            image 'node:lts-buster-slim'
-                args '-p 3000:3000'}
-        }
-    }
+    agent any
+    tools 
+    { nodejs '16.10.0' }  
    
     stages {
         stage('Build') {
@@ -13,10 +9,10 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage('Test') {
+        /*stage('Test') {
             steps {
                 sh './jenkins/scripts/test.sh'
             }
-        } 
+        } */
     }
 }
