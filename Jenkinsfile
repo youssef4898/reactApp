@@ -22,12 +22,9 @@ pipeline {
 
     sh "docker build -t youssef1998/reactwebapp:${TAG} ."
 
-    withDockerRegistry([credentialsId: "01", url: ""]) {
-     /* sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'*/
-        sh 'echo "docker logged in "'
-    }
-
-    // Push the Docker image to Docker Hub with the new tag
+      sh 'docker login -u "youssef1998" -p "123456789" docker.io '
+      sh 'echo "docker logged in "'
+      // Push the Docker image to Docker Hub with the new tag
     sh "docker push youssef1998/reactwebapp:${TAG}"
   }
 }
