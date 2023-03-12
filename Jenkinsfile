@@ -27,13 +27,14 @@ pipeline {
 
       // Update the Kubernetes deployment with the new image tag
       sh "k3s kubectl create deployment you-deployment --image=youssef1998/reactwebapp:latest"
-      sh "kubectl expose deployment you-deployment --type=NodePort --port=3000 --target-port=8085"
+      sh "kubectl expose deployment you-deployment --type=NodePort --port=8089 --target-port=3000"
 
 
       sh "sleep 300"
 
       // Delete the Kubernetes deployment
       sh "k3s kubectl delete deployment/you-deployment"
+      sh "k3s kubectl delete svc you-deployment"
 
     }
   }
