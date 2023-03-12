@@ -22,7 +22,7 @@ pipeline {
 
     sh "docker build -t youssef1998/reactwebapp:${TAG} ."
 
-    withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
+    withDockerRegistry([credentialsId: "01", url: ""]) {
      /* sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'*/
         sh 'echo "docker logged in "'
     }
