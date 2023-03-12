@@ -18,7 +18,7 @@ pipeline {
       sh 'docker login -u "youssef1998" -p "123456789" docker.io '
       sh 'echo "docker logged in "'
       // Push the Docker image to Docker Hub with the new tag
-    sh "docker push youssef1998/reactwebapp:latest}"
+    sh "docker push youssef1998/reactwebapp:latest"
   }
 }
    
