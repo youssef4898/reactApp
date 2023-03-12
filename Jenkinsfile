@@ -26,11 +26,10 @@ pipeline {
   steps {
 
       // Update the Kubernetes deployment with the new image tag
-      sh "k3s kubectl set image deployment/you-deployment you-container=youssef1998/reactwebapp:latest"
+      sh "k3s kubectl create deployment you-deployment --image=youssef1998/reactwebapp:latest"
+      sh "kubectl expose deployment my-deployment --type=NodePort --port=3000 --target-port=8085"
 
-      // Wait for the deployment to finish rolling out
-      sh "k3s kubectl rollout status deployment/you-deployment"
-      
+
       sh "sleep 300"
 
       // Delete the Kubernetes deployment
