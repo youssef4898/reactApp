@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     stages {
-       /* stage('Build') { 
+       stage('Build') { 
             steps {
                 sh 'npm install' 
             }
@@ -10,30 +10,23 @@ pipeline {
         
   stage('Build and push Docker image') {
  
-      environment {
-    TAG = '1'
-  }
+ 
   steps {
-    
-
-    script {
-      TAG = TAG.toInteger() + 1
-    }
-
-    sh "docker build -t youssef1998/reactwebapp:${TAG} ."
+   
+    sh "docker build -t youssef1998/reactwebapp:latest ."
 
       sh 'docker login -u "youssef1998" -p "123456789" docker.io '
       sh 'echo "docker logged in "'
       // Push the Docker image to Docker Hub with the new tag
-    sh "docker push youssef1998/reactwebapp:${TAG}"
+    sh "docker push youssef1998/reactwebapp:latest}"
   }
-}*/
+}
    
   stage('Deploy to Kubernetes') {
   steps {
 
       // Update the Kubernetes deployment with the new image tag
-      sh "k3s kubectl set image deployment/you-deployment you-container=youssef1998/reactwebapp:${TAG}"
+      sh "k3s kubectl set image deployment/you-deployment you-container=youssef1998/reactwebapp:latest"
 
       // Wait for the deployment to finish rolling out
       sh "k3s kubectl rollout status deployment/you-deployment"
