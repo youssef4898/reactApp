@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     stages {
-       /*stage('Build') { 
+       stage('Build') { 
             steps {
                 sh 'npm install' 
             }
@@ -17,10 +17,9 @@ pipeline {
 
       sh 'docker login -u "youssef1998" -p "123456789" docker.io '
       sh 'echo "docker logged in "'
-      // Push the Docker image to Docker Hub with the new tag
     sh "docker push youssef1998/reactwebapp:latest"
   }
-}*/
+}
    
   stage('Deploy to Kubernetes') {
   steps {
@@ -29,10 +28,8 @@ pipeline {
       sh "k3s kubectl create deployment you-deployment --image=youssef1998/reactwebapp:latest"
       sh "kubectl expose deployment you-deployment --type=NodePort --port=8089 --target-port=3000"
 
-
       sh "sleep 300"
 
-      // Delete the Kubernetes deployment
       sh "k3s kubectl delete deployment/you-deployment"
       sh "k3s kubectl delete svc you-deployment"
 
